@@ -59,7 +59,11 @@ class SimpleKeyboardKeyNavigation {
             row: rowPos,
             button: btnPos
           };
-
+          const ariaLabel = buttonDOM.getAttribute("aria-label");
+          if (ariaLabel && typeof window !== "undefined" && window.$bus) {
+            window.$bus.emit("talk", `Selected ${ariaLabel}`);
+            console.warn(`Selected ${ariaLabel}`);
+          }
           return true;
         } else {
           if (keyboard.options.debug)
